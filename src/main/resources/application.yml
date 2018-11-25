@@ -1,0 +1,44 @@
+spring:
+  resources:
+    add-mappings: true
+    cache:
+      period: 3600
+    chain:
+      cache: true
+      enabled: true
+      gzipped: true
+      html-application-cache: true
+    static-locations: classpath:/static/
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+  datasource:
+    url: jdbc:mysql://localhost:3306/spike?useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: tangyaya1996624*
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+  redis:
+    host: localhost
+    port: 6379
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    listener:
+      simple:
+        max-concurrency: 10
+        prefetch: 1
+        default-requeue-rejected: true
+        retry:
+          enabled: true
+mybatis:
+  mapper-locations: /mapper/*.xml
+  type-aliases-package: com.tangbaobao.spike.domain
+  configuration:
+    mapUnderscoreToCamelCase: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+

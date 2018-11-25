@@ -1,0 +1,64 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tangbaobao.spike.dao.OrderDao">
+
+    <sql id="skip_order">
+      `id`,
+      `user_id`,
+      `order_id`,
+      `product_id`
+    </sql>
+    <sql id="order">
+        `id`,
+        `user_id`,
+        `product_id`,
+        `delivery_addr_id`,
+        `product_name`,
+        `product_count`,
+        `product_price`,
+        `order_source`,
+        `status`,
+        `ctime`,
+        `pay_time`
+    </sql>
+    <select id="getSpikeOrderByUserIdAndProductId" resultType="com.tangbaobao.spike.domain.SpikeOrder">
+        SELECT
+        <include refid="skip_order"/>
+        FROM
+        `spike_order`
+        WHERE
+        `user_id`= #{userId}
+        AND
+        `product_id`= #{productId}
+    </select>
+    <insert id="save"  parameterType="com.tangbaobao.spike.domain.Order" useGeneratedKeys="true" >
+        INSERT
+        INTO
+        `order`(<include refid="order"/>)
+        VALUES(
+        #{id},
+        #{userId},
+        #{productId},
+        #{deliveryAddrId},
+        #{productName},
+        #{productCount},
+        #{productPrice},
+        #{orderSource},
+        #{status},
+        #{ctime},
+        #{payTime}
+        )
+    </insert>
+    <insert id="saveSpikeOrder" parameterType="com.tangbaobao.spike.domain.SpikeOrder">
+        INSERT
+        INTO
+        `spike_order`(<include refid="skip_order"/>)
+        VALUES(
+        #{id},
+        #{userId},
+        #{orderId},
+        #{productId}
+        )
+    </insert>
+</mapper>

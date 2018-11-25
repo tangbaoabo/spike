@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>商品列表</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <div th:replace="common_resource::header"></div>
+</head>
+<body>
+
+<div class="panel panel-default">
+    <div class="panel-heading">秒杀商品列表</div>
+    <table class="table" id="goodslist">
+        <tr>
+            <td>商品名称</td>
+            <td>商品图片</td>
+            <td>商品原价</td>
+            <td>秒杀价</td>
+            <td>库存数量</td>
+            <td>详情</td>
+        </tr>
+        <tr th:each="product,productStat : ${productVOList}">
+            <td th:text="${product.productName}"></td>
+            <td><img th:src="@{${product.productImg}}" width="100" height="100"/></td>
+            <td th:text="${product.productPrice}"></td>
+            <td th:text="${product.spikePrice}"></td>
+            <td th:text="${product.stockCount}"></td>
+            <td><a th:href="'/product/detail/'+${product.id}">详情</a></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
